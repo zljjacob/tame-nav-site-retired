@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="TAME-Nav: temporal asymmetric mixture-of-experts distillation for robot navigation. Paper, video demonstrations, and method overview.">
+  <meta property="og:title" content="TAME-Nav | Robot Navigation">
+  <meta property="og:description" content="A single local-navigation policy for obstacle avoidance, narrow passages, and local-trap escape.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zljjacob.github.io/TAME-Nav/">
+  <link rel="canonical" href="https://zljjacob.github.io/TAME-Nav/">
+  <title>TAME-Nav | Robot Navigation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='5' fill='%23243e63'/%3E%3Cpath d='M10 12h20M20 12v18' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="wordmark" href="#main">TAME-Nav</a>
+    <nav aria-label="Main navigation">
+      <a href="#video">Video</a>
+      <a href="#method">Method</a>
+    </nav>
+  </div></header>
+  <main id="main" class="container">
+    <section class="paper-header" aria-labelledby="paper-title">
+      <h1 id="paper-title"><strong>TAME-Nav</strong><span>Temporal Asymmetric Mixture-of-Experts Distillation for Agile and Versatile Robot Navigation</span></h1>
+      <p class="authors">Lingjie Zhang<sup>1,2</sup>, Jun Xue<sup>1,2</sup>, Shanze Wang<sup>2,3</sup>, Haoyu Xi<sup>1,2</sup>, Xinming Zhang<sup>2,4</sup>, Xiaoyu Shen<sup>2</sup>, <a href="mailto:zhw@eitech.edu.cn">Wei Zhang<sup>2,*</sup></a></p>
+      <div class="affiliations">
+        <span><sup>1</sup> <span>Shanghai Jiao Tong University</span></span>
+        <span><sup>2</sup> <span>Eastern Institute of Technology, Ningbo</span></span>
+        <span><sup>3</sup> <span>The Hong Kong Polytechnic University</span></span>
+        <span><sup>4</sup> <span>University of Science and Technology of China</span></span>
+      </div>
+      <div class="paper-links">
+        <a class="button primary" href="assets/TAME-Nav.pdf" target="_blank" rel="noopener">Paper</a>
+        <a class="button" href="https://github.com/zljjacob/TAME-Nav" target="_blank" rel="noopener">Code</a>
+        <a class="button" href="#video">Video</a>
+      </div>
+      <p class="overview">A single local-navigation policy for obstacle avoidance, narrow passages, and local-trap escape, using only onboard observations and a local goal.</p>
+    </section>
+    <section id="video" class="video-section" aria-labelledby="video-heading">
+      <div class="section-line"><h2 id="video-heading">Video</h2><a class="meta" href="assets/TAME-Nav.mp4" download="TAME-Nav.mp4">Download video</a></div>
+      <div class="video-frame">
+        <video id="research-video" controls playsinline preload="none" poster="assets/video-poster.jpg" width="1920" height="1072" aria-label="TAME-Nav research video">
+          <source src="assets/TAME-Nav.mp4" type='video/mp4; codecs="avc1.640028, mp4a.40.2"'>
+          <source src="assets/TAME-Nav.webm" type='video/webm; codecs="vp9, opus"'>
+          <p><a href="assets/TAME-Nav.mp4">Download the video</a></p>
+        </video>
+      </div>
+      <p id="video-status" class="status" role="status"></p>
+      <div class="video-list">
+        <div class="video-frame"><video aria-label="Video clip 1" id="trap-clip" controls playsinline preload="none" poster="assets/local-trap.jpg" width="960" height="536">
+            <source src="assets/local-trap-silent.mp4" type='video/mp4; codecs="avc1.64001f"'>
+            <source src="assets/local-trap-silent.webm" type='video/webm; codecs="vp9"'>
+            <a href="assets/local-trap-silent.mp4">Download clip</a>
+          </video></div>
+        <div class="video-frame"><video aria-label="Video clip 2" id="overhead-clip" controls playsinline preload="none" poster="assets/trap-overhead.jpg" width="960" height="536">
+            <source src="assets/trap-overhead-silent.mp4" type='video/mp4; codecs="avc1.64001f"'>
+            <source src="assets/trap-overhead-silent.webm" type='video/webm; codecs="vp9"'>
+            <a href="assets/trap-overhead-silent.mp4">Download clip</a>
+          </video></div>
+        <div class="video-frame"><video aria-label="Video clip 3" id="case-clip" controls playsinline preload="none" poster="assets/moving-case.jpg" width="960" height="536">
+            <source src="assets/moving-case-silent.mp4" type='video/mp4; codecs="avc1.64001f"'>
+            <source src="assets/moving-case-silent.webm" type='video/webm; codecs="vp9"'>
+            <a href="assets/moving-case-silent.mp4">Download clip</a>
+          </video></div>
+        <div class="video-frame"><video aria-label="Video clip 4" id="human-clip" controls playsinline preload="none" poster="assets/human-interaction.jpg" width="960" height="536">
+            <source src="assets/human-interaction-silent.mp4" type='video/mp4; codecs="avc1.64001f"'>
+            <source src="assets/human-interaction-silent.webm" type='video/webm; codecs="vp9"'>
+            <a href="assets/human-interaction-silent.mp4">Download clip</a>
+          </video></div>
+        <div class="video-frame"><video aria-label="Video clip 5" id="dynamic-clip" controls playsinline preload="none" poster="assets/dynamic-obstacles.jpg" width="960" height="536">
+            <source src="assets/dynamic-obstacles-silent.mp4" type='video/mp4; codecs="avc1.64001f"'>
+            <source src="assets/dynamic-obstacles-silent.webm" type='video/webm; codecs="vp9"'>
+            <a href="assets/dynamic-obstacles-silent.mp4">Download clip</a>
+          </video></div>
+        <div class="video-frame"><video aria-label="Video clip 6" id="field-clip" controls playsinline preload="none" poster="assets/dynamic-field.jpg" width="960" height="536">
+            <source src="assets/dynamic-field-silent.mp4" type='video/mp4; codecs="avc1.64001f"'>
+            <source src="assets/dynamic-field-silent.webm" type='video/webm; codecs="vp9"'>
+            <a href="assets/dynamic-field-silent.mp4">Download clip</a>
+          </video></div>
+      </div>
+    </section>
+    <section id="method" class="section" aria-labelledby="method-heading">
+      <h2 id="method-heading">Method</h2>
+      <p class="section-intro">Distill a privileged Teacher into a temporal Soft-MoE Student that can run on the robot.</p>
+      <figure class="architecture">
+        <a href="assets/architecture.png" target="_blank" rel="noopener" aria-label="Open full-resolution method diagram"><img src="assets/architecture.png" width="1570" height="725" loading="lazy" alt="Teacher–Student architecture: clean histories and causal obstacle tracks supervise a temporal Soft-MoE Student through latent distillation, with a shared Actor and a training-only Critic."></a>
+        <figcaption>Teacher–Student framework. Click the figure to enlarge.</figcaption>
+      </figure>
+      <div class="method-points">
+        <article><h3>Privileged supervision</h3><p>The Teacher combines clean observation histories with causal dynamic-obstacle tracks. The Student learns its navigation representation through latent distillation.</p></article>
+        <article><h3>Temporal Soft-MoE</h3><p>A GRU encodes ten observation frames. Eight softly routed experts combine complementary navigation features into one representation.</p></article>
+        <article><h3>Diverse training scenes</h3><p>600 procedural layouts cover six scene families. Asymmetric randomization adds sensing noise and delay to the Student while keeping Teacher supervision clean.</p></article>
+      </div>
+      <div class="deployment"><strong>At deployment</strong><p>Onboard observations + local goal → temporal Student → shared Actor + LiDAR CBF → velocity commands. No explicit object tracking or global-map input.</p></div>
+      <figure class="training-figure paper-figure">
+        <a href="assets/training-scenes.png" target="_blank" rel="noopener" aria-label="Enlarge the six training scene families"><img src="assets/training-scenes.png" width="2400" height="1716" loading="lazy" alt="Six training scene families: dense clutter, dynamic crossings, concave traps, irregular narrow corridors, occluded interactions, and composite indoor layouts."></a>
+        <figcaption><strong>Six training scene families</strong><span>600 procedural layouts cover static constraints and dynamic interactions. Figure 2.</span></figcaption>
+      </figure>
+    </section>
+    <section id="citation" class="section citation-section" aria-labelledby="citation-heading">
+      <div class="section-line"><h2 id="citation-heading">Citation</h2><button type="button" id="copy-citation">Copy BibTeX</button></div>
+      <pre id="bibtex">@misc{zhang2026tamenav,
+  title  = {TAME-Nav: Temporal Asymmetric Mixture-of-Experts
+            Distillation for Agile and Versatile Robot Navigation},
+  author = {Zhang, Lingjie and Xue, Jun and Wang, Shanze and Xi, Haoyu
+            and Zhang, Xinming and Shen, Xiaoyu and Zhang, Wei},
+  year   = {2026},
+  note   = {Manuscript}
+}</pre>
+      <p id="copy-status" class="status" role="status"></p>
+    </section>
+  </main>
+  <footer class="container"><span>TAME-Nav</span><a href="assets/TAME-Nav.pdf" target="_blank" rel="noopener">Paper</a></footer>
+</body>
+</html>
